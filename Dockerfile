@@ -12,9 +12,11 @@ WORKDIR /app
 
 EXPOSE 8000
 
-RUN python -m venv /venv && \
-    /venv/bin/pip install -upgrade pip &&\
-    /venv/bin/pip install -r requirements.txt && \
+RUN python3 -m venv /py && \
+    /py/bin/pip install --upgrade pip && \
+    /py/bin/pip install --upgrade pip wheel && \
+    apk add --no-cache gcc musl-dev python3-dev && \
+    /py/bin/pip install -r /requirements.txt && \
     adduser --disabled-pasword --no-create-home user
 
 ENV PATH="/venv/bin:$PATH"

@@ -42,7 +42,7 @@ Such an application is designed as a set of containers which have to both run to
 
 [Syntax version](https://docs.docker.com/compose/compose-file/compose-versioning/)
 
-## Command `docker compose build`
+## Command `docker compose build --no-cache`
 # Containerisation
 
 # Docker images
