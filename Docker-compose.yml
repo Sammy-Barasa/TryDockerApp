@@ -1,0 +1,22 @@
+version: 'version'
+
+services:
+  app:
+    build: 
+      context: .
+    ports:
+      - 8000:8000
+    volumes:
+      - ./app:/app
+
+    environment:
+      - SECRET_KEY=qwerty
+
+  
+db:
+  image: postgres:14.3-alpine
+  environment:
+    - POSTGRES_DB=devdb
+    - POSTGRES_USER= me
+    - POSTGRES_PASSWORD = changeme
+    
