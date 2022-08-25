@@ -1,14 +1,37 @@
 # Docker
 From a Dockerfile we build a **docker image**.  
 `~/TryDockerApp$ docker build -t trydocker -f Dockerfile .`
-```sh
+```s
 :~/TryDockerApp$ docker build . -t trydocker -f v2/Dockerfile
 
+[+] Building 232.3s (12/12) FINISHED
+ => [internal] load build definition from Dockerfile           2.7s
+ => => transferring dockerfile: 681B                           0.7s
+ => [internal] load .dockerignore                              2.1s
+ => => transferring context: 34B                               0.6s
+ => [internal] load metadata for docker.io/library/python:3.8.13-slim-buster  9.6s
+ => [auth] library/python:pull token for registry-1.docker.io                 0.0s
+ => [1/6] FROM docker.io/library/python:3.8.13-slim-buster@sha256:d7da2b370dbb2f3f34bacc4aeec4ee52c22e7e49b41957a  0.1s
+ => [internal] load build context                              0.8s
+ => => transferring context: 16.64kB                           0.1s
+ => CACHED [2/6] RUN mkdir app                                 0.0s
+ => CACHED [3/6] WORKDIR /app                                  0.0s
+ => [4/6] COPY requirements.txt requirements.txt               1.6s
+ => [5/6] COPY .. .                                            3.4s
+ => [6/6] RUN python3 -m venv /venv &&     /venv/bin/pip install --upgrade pip &&     /venv/bin/pip install --u  205.2s
+ => exporting to image                                         7.5s
+ => => exporting layers                                        6.7s
+ => => writing image sha256:0be6209b4a1d3e2f566eddb1c6cdc9f5aa46b616ce288ecf123111de90df109a  0.1s
+ => => naming to docker.io/library/trydocker                   0.1s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them  
+
+:~/TryDockerApp$
 ```
 Listing all the docker images with the command `docker images`  
 
 
-```sh
+```s
 :~/TryDockerApp$ docker images
 
 REPOSITORY     TAG       IMAGE ID       CREATED       SIZE 
@@ -17,7 +40,7 @@ trydocker      latest    04d6f0dd19f0   7 hours ago   196MB
 ```
 Running the docker image creates a **docker container**  
  
-```sh
+```s
 :~/TryDockerApp$ docker run -it -d -p 8000:8000 trydocker
 
 0c05931ec9a861287b63eb04f7a062765786bc9ba143a844929289983d07a229
@@ -26,7 +49,7 @@ Running the docker image creates a **docker container**
 Listing all the docker containers at running at the moment with `docker ps` command  
 
 
-```sh
+```s
 :~/TryDockerApp$ docker ps
 
 CONTAINER ID   IMAGE       COMMAND     CREATED              STATUS          PORTS                    NAMES  
@@ -36,7 +59,7 @@ CONTAINER ID   IMAGE       COMMAND     CREATED              STATUS          PORT
 To execute shell commands on a running docker container we use `docker exec <container_name>` command  
 
 
-```sh
+```s
 :~/TryDockerApp$ docker exec -t -i beautiful_torvalds /bin/bash
 
 user@0c05931ec9a8:/app$ ls  
@@ -45,7 +68,7 @@ LICENSE  README.md  docker-compose.yml  requirements.txt  v2
 ```
 Stopping a runing docker we use the `docker kill <container_id>` command with the container ID. sThe command `docker stop <container_id>` can also be used.
    
-```sh
+```s
 :~/TryDockerApp$ docker kill 0c05931ec9a8
 
 0c05931ec9a8
