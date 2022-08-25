@@ -65,18 +65,18 @@ C:\Users[USER]\AppData\Roaming\Docker Desktop
 REPOSITORY   TAG       IMAGE ID       CREATED       SIZE
 trydocker    latest    04d6f0dd19f0   7 hours ago   196MB
 
-`docker run -it -d -p 8000:8000 trydocker`
+`docker run -it -d -p 8000:8000 trydocker` 
 
 0c05931ec9a861287b63eb04f7a062765786bc9ba143a844929289983d07a229
 
 `docker ps`
 
-CONTAINER ID   IMAGE       COMMAND     CREATED              STATUS          PORTS                    NAMES
+CONTAINER ID   IMAGE       COMMAND     CREATED              STATUS          PORTS                    NAMES  
 0c05931ec9a8   trydocker   "python3"   About a minute ago   Up 39 seconds   0.0.0.0:8000->8000/tcp   beautiful_torvalds
 
 `docker exec -t -i beautiful_torvalds /bin/bash`
 
-user@0c05931ec9a8:/app$ ls
+user@0c05931ec9a8:/app$ ls  
 LICENSE  README.md  docker-compose.yml  requirements.txt  v2
 
 `docker kill 0c05931ec9a8`
@@ -84,10 +84,10 @@ LICENSE  README.md  docker-compose.yml  requirements.txt  v2
 0c05931ec9a8
 
 
-`docker ps`
+`docker ps`  
 
 CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
-` docker rm beautiful_torvalds`
+` docker rm beautiful_torvalds`  
 
 beautiful_torvalds
