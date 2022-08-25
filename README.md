@@ -1,7 +1,7 @@
 # Docker
 From a Dockerfile we build a **docker image**.  
 `~/TryDockerApp$ docker build -t trydocker -f Dockerfile .`
-```s
+```sh
 :~/TryDockerApp$ docker build . -t trydocker -f v2/Dockerfile
 
 [+] Building 232.3s (12/12) FINISHED
@@ -31,7 +31,7 @@ Use 'docker scan' to run Snyk tests against images to find vulnerabilities and l
 Listing all the docker images with the command `docker images`  
 
 
-```s
+```sh
 :~/TryDockerApp$ docker images
 
 REPOSITORY     TAG       IMAGE ID       CREATED       SIZE 
@@ -40,7 +40,7 @@ trydocker      latest    04d6f0dd19f0   7 hours ago   196MB
 ```
 Running the docker image creates a **docker container**  
  
-```s
+```sh
 :~/TryDockerApp$ docker run -it -d -p 8000:8000 trydocker
 
 0c05931ec9a861287b63eb04f7a062765786bc9ba143a844929289983d07a229
@@ -49,7 +49,7 @@ Running the docker image creates a **docker container**
 Listing all the docker containers at running at the moment with `docker ps` command  
 
 
-```s
+```sh
 :~/TryDockerApp$ docker ps
 
 CONTAINER ID   IMAGE       COMMAND     CREATED              STATUS          PORTS                    NAMES  
@@ -59,7 +59,7 @@ CONTAINER ID   IMAGE       COMMAND     CREATED              STATUS          PORT
 To execute shell commands on a running docker container we use `docker exec <container_name>` command  
 
 
-```s
+```sh
 :~/TryDockerApp$ docker exec -t -i beautiful_torvalds /bin/bash
 
 user@0c05931ec9a8:/app$ ls  
@@ -68,7 +68,7 @@ LICENSE  README.md  docker-compose.yml  requirements.txt  v2
 ```
 Stopping a runing docker we use the `docker kill <container_id>` command with the container ID. sThe command `docker stop <container_id>` can also be used.
    
-```s
+```sh
 :~/TryDockerApp$ docker kill 0c05931ec9a8
 
 0c05931ec9a8
