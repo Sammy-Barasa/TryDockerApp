@@ -8,6 +8,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
+"""
 
 
 from pathlib import Path
@@ -121,3 +122,5 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+RELEASE_ID = 'sha256:bb2ac27b847d13f6a9a8fede8aed3d2a5b62619facc8b3c78cb7856de151fae3'

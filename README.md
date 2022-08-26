@@ -119,6 +119,99 @@ Push the docker image to the docker hub with the command, `docker push <image_ta
 ```sh
 :~/TryDockerApp$ docker push kesadocker1/trydockerdjango:v1
 ```
+
+### **Publishing to heroku**
+Create app  
+
+```sh
+heroku create trydockerdjangoheroku
+Creating ⬢ trydockerdjangoheroku... done
+https://trydockerdjangoheroku.herokuapp.com/ | https://git.heroku.com/trydockerdjangoheroku.git
+```
+
+Build container in heroku  
+
+```sh
+:~/TryDockerApp/v2$ heroku container:push web -a=trydockerdjangoheroku
+
+
+[+] Building 209.5s (11/11) FINISHED
+ => [internal] load build definition from Dockerfile                                                                   1.2s
+ => => transferring dockerfile:38B                                            0.0s
+ => [internal] load .dockerignore                                             1.9s
+ => => transferring context: 34B                                              0.0s
+ => [internal] load metadata for docker.io/library/python:3.8.13-slim-buster  8.8s
+ => [auth] library/python:pull token for registry-1.docker.io                 0.0s
+ => [internal] load build context                                             0.5s
+ => => transferring context: 8.28kB                                           0.0s
+ => [1/5] FROM docker.io/library/python:3.8.13-slim-buster@sha256:d7da2b370dbb2f3f34bacc4aeec4ee52c22e7e49b41957a 0.0s
+ => CACHED [2/5] RUN mkdir app                                                0.0s
+ => CACHED [3/5] WORKDIR /app                                                 0.0s
+ => [4/5] COPY . .                                                            1.4s
+ => [5/5] RUN python3 -m venv /venv &&     /venv/bin/pip install --upgrade pip &&     /venv/bin/pip install --u  190.9s
+ => exporting to image                                                        5.0s
+ => => exporting layers                                                       4.4s
+ => => writing image sha256:eacd9b9605374da33c1c2f9fc22cf840b35ff78a05978360b278afcab75c5625      0.1s
+ => => naming to registry.heroku.com/trydockerdjangoheroku/web                0.1s
+
+Use 'docker scan' to run Snyk tests against images to find vulnerabilities and learn how to fix them
+=== Pushing web (/home/barasa/TryDockerApp/Dockerfile)
+Using default tag: latest
+The push refers to repository [registry.heroku.com/trydockerdjangoheroku/web]
+24b7ef588814: Pushing [=========>                                         ]   14.9MB/79.33MB
+23e9c4e7e3cd: Pushed
+24b7ef588814: Pushing [===================================>               ]  55.97MB/79.33MB
+6d67fb7af918: Layer already exists
+24b7ef588814: Pushed
+3ae97ebd75ca: Layer already exists
+5491686ec41e: Layer already exists
+1ffc252b74d0: Layer already exists
+56a5c11640c8: Layer already exists
+
+
+
+
+latest: digest: sha256:bb2ac27b847d13f6a9a8fede8aed3d2a5b62619facc8b3c78cb7856de151fae3 size: 2203
+Your image has been successfully pushed. You can now release it with the 'container:release' command.
+
+```
+Heroku container release  
+
+```sh
+:~/TryDockerApp$ Heroku container:release -a trydockerdjangoheroku
+Releasing images web to trydockerdjangoheroku... done
+```
+Heroku logs
+
+```sh
+:~/TryDockerApp$ heroku logs --tail -a trydockerdjangoheroku
+
+2022-08-26T12:39:44.522306+00:00 app[api]: Initial release by user blightcnnproject@gmail.com
+2022-08-26T12:39:44.522306+00:00 app[api]: Release v1 created by user blightcnnproject@gmail.com
+2022-08-26T12:39:44.709340+00:00 app[api]: Enable Logplex by user blightcnnproject@gmail.com
+2022-08-26T12:39:44.709340+00:00 app[api]: Release v2 created by user blightcnnproject@gmail.com
+2022-08-26T15:21:34.837711+00:00 app[api]: Release v3 created by user blightcnnproject@gmail.com
+2022-08-26T15:21:34.837711+00:00 app[api]: Deployed web (eacd9b960537) by user blightcnnproject@gmail.com
+2022-08-26T15:21:34.865303+00:00 app[api]: Scaled to web@1:Free by user blightcnnproject@gmail.com
+2022-08-26T15:21:38.454311+00:00 heroku[web.1]: Starting process with command `/bin/sh -c gunicorn\ trydockerdjango.wsgi:application\ --bind\ 0.0.0.0:\19792`
+2022-08-26T15:21:39.430050+00:00 app[web.1]: [2022-08-26 15:21:39 +0000] [5] [INFO] Starting gunicorn 20.1.0
+2022-08-26T15:21:39.430453+00:00 app[web.1]: [2022-08-26 15:21:39 +0000] [5] [INFO] Listening at: http://0.0.0.0:19792 (5)
+2022-08-26T15:21:39.430612+00:00 app[web.1]: [2022-08-26 15:21:39 +0000] [5] [INFO] Using worker: sync
+2022-08-26T15:21:39.433439+00:00 app[web.1]: [2022-08-26 15:21:39 +0000] [7] [INFO] Booting worker with pid: 7
+2022-08-26T15:21:40.081114+00:00 heroku[web.1]: State changed from starting to up
+2022-08-26T15:25:12.431289+00:00 app[web.1]: Invalid HTTP_HOST header: 'trydockerdjangoheroku.herokuapp.com'. You may need to add 'trydockerdjangoheroku.herokuapp.com' to ALLOWED_HOSTS.
+2022-08-26T15:25:12.459796+00:00 app[web.1]: Bad Request: /
+2022-08-26T15:25:12.463156+00:00 heroku[router]: at=info method=GET path="/" host=trydockerdjangoheroku.herokuapp.com request_id=dcfc2258-39e1-4353-9d4a-8ae2c81252a4 fwd="102.222.146.34" dyno=web.1 connect=0ms service=33ms status=400 bytes=59367 protocol=https
+2022-08-26T15:25:13.719468+00:00 app[web.1]: Invalid HTTP_HOST header: 'trydockerdjangoheroku.herokuapp.com'. You may need to add 'trydockerdjangoheroku.herokuapp.com' to ALLOWED_HOSTS.
+2022-08-26T15:25:13.739335+00:00 app[web.1]: Bad Request: /favicon.ico
+2022-08-26T15:25:13.747688+00:00 heroku[router]: at=info method=GET path="/favicon.ico" host=trydockerdjangoheroku.herokuapp.com request_id=12c4ccb6-1997-4544-91e6-ae916ac8e736 fwd="102.222.146.34" dyno=web.1 connect=0ms service=29ms status=400 bytes=59325 protocol=https
+```
+Remove heroku running container
+
+```sh
+barasa@DESKTOP-CFF6CAC:~/TryDockerApp$heroku container:rm web -a trydockerdjangoheroku
+Removing container web for ⬢ trydockerdjangoheroku... done
+```
 # Docker-compose
 
 ## **Docker compose file specifications**
