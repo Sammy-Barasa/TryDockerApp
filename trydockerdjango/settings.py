@@ -8,7 +8,7 @@ https://docs.djangoproject.com/en/4.0/topics/settings/
 
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.0/ref/settings/
-"""
+
 
 from pathlib import Path
 
@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-gc2&lt(m3z2rwv^fn6a+o3s+vjn%5ii2oz8xncb63&p!-2g7iu
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://trydockerdjangoheroku.herokuapp.com/",]
 
 
 # Application definition

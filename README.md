@@ -1,4 +1,7 @@
 # Docker
+
+### **Build docker image from docker file**
+
 From a Dockerfile we build a **docker image**.  
 `~/TryDockerApp$ docker build -t trydocker -f Dockerfile .`
 ```sh
@@ -28,6 +31,7 @@ Use 'docker scan' to run Snyk tests against images to find vulnerabilities and l
 
 :~/TryDockerApp$
 ```
+### **List all docker images**
 Listing all the docker images with the command `docker images`  
 
 
@@ -38,6 +42,9 @@ REPOSITORY     TAG       IMAGE ID       CREATED       SIZE
 
 trydocker      latest    04d6f0dd19f0   7 hours ago   196MB
 ```
+
+### **Running the docker image as a container**  
+
 Running the docker image creates a **docker container**  
  
 ```sh
@@ -45,7 +52,7 @@ Running the docker image creates a **docker container**
 
 0c05931ec9a861287b63eb04f7a062765786bc9ba143a844929289983d07a229
 ```
-
+### **List all docker containers**
 Listing all the docker containers at running at the moment with `docker ps` command  
 
 
@@ -56,6 +63,8 @@ CONTAINER ID   IMAGE       COMMAND     CREATED              STATUS          PORT
 
 0c05931ec9a8   trydocker   "python3"   About a minute ago   Up 39 seconds   0.0.0.0:8000->8000/tcp   beautiful_torvalds
 ```
+
+### **execute commands in the dockercontainer**
 To execute shell commands on a running docker container we use `docker exec <container_name>` command  
 
 
@@ -66,6 +75,8 @@ user@0c05931ec9a8:/app$ ls
 
 LICENSE  README.md  docker-compose.yml  requirements.txt  v2
 ```
+### **Stop docker containers**   
+
 Stopping a runing docker we use the `docker kill <container_id>` command with the container ID. sThe command `docker stop <container_id>` can also be used.
    
 ```sh
@@ -84,15 +95,33 @@ CONTAINER ID   IMAGE     COMMAND   CREATED   STATUS    PORTS     NAMES
 
  The docker container can then  be removed
 
-
+### **Remove docker container**
 ```sh
 :~/TryDockerApp$ docker rm beautiful_torvalds
 
 beautiful_torvalds
 ```
+
+### **Pushing docker image to docker hub**
+First login using the docker cli command `docker login`  
+
+```sh
+:~/TryDockerApp$ docker login
+```
+
+Tag the docker image username/docker_image_name:_tag_    
+
+```sh
+:~/TryDockerApp$ docker tag trydockerdjango kesadocker1/trydockerdjango:v1
+```
+Push the docker image to the docker hub with the command, `docker push <image_tag>`  
+
+```sh
+:~/TryDockerApp$ docker push kesadocker1/trydockerdjango:v1
+```
 # Docker-compose
 
-## Compose file specifications
+## **Docker compose file specifications**
 The docker Compose file is a YAML file defining services, networks, and volumes for a Docker application.
 The latest and recommended version of the Compose file format is defined by the [Compose Specification](https://github.com/compose-spec/compose-spec/blob/master/spec.md). 
 
